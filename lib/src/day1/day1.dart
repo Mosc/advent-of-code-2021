@@ -1,8 +1,9 @@
 import 'dart:io';
 
 Future<void> calculate() async {
-  List<String> lines = await File('./lib/assets/day1/input').readAsLines();
-  List<int> depths = lines.map(int.parse).toList();
+  final List<String> lines =
+      await File('./lib/assets/day1/input').readAsLines();
+  final List<int> depths = lines.map(int.parse).toList();
   _part1(depths);
   _part2(depths);
 }
