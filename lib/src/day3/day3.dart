@@ -42,16 +42,16 @@ void _part2(List<List<int>> bitLines) {
   List<List<int>> co2Candidates = <List<int>>[...bitLines];
 
   for (int column = 0; column < columnLength; column++) {
-    final Prevalence<int> oxygenBitPopularity =
+    final Prevalence<int> oxygenPrevalence =
         _calculatePrevalence(oxygenCandidates, column);
-    final Prevalence<int> co2BitPopularity =
+    final Prevalence<int> co2Prevalence =
         _calculatePrevalence(co2Candidates, column);
 
     if (oxygenCandidates.length > 1) {
       oxygenCandidates = oxygenCandidates
           .where((List<int> bitLine) =>
               bitLine[column] ==
-              (oxygenBitPopularity.same ? 1 : oxygenBitPopularity.most.key))
+              (oxygenPrevalence.same ? 1 : oxygenPrevalence.most.key))
           .toList();
     }
 
@@ -59,7 +59,7 @@ void _part2(List<List<int>> bitLines) {
       co2Candidates = co2Candidates
           .where((List<int> bitLine) =>
               bitLine[column] ==
-              (co2BitPopularity.same ? 0 : co2BitPopularity.least.key))
+              (co2Prevalence.same ? 0 : co2Prevalence.least.key))
           .toList();
     }
   }
