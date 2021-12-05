@@ -30,21 +30,17 @@ Future<void> calculate() async {
 
 void _part1(Iterable<Iterable<Coordinate>> vents, List<List<int>> ventGrid) {
   for (Iterable<Coordinate> vent in vents) {
-    if (vent.first.x == vent.last.x) {
-      final int x = vent.first.x;
-      final int yStart = min(vent.first.y, vent.last.y);
-      final int yEnd = max(vent.first.y, vent.last.y);
+    if (vent.first.x == vent.last.x || vent.first.y == vent.last.y) {
+      final int length = max(
+        (vent.first.x - vent.last.x).abs(),
+        (vent.first.y - vent.last.y).abs(),
+      );
+      final int xDirection = vent.last.x.compareTo(vent.first.x);
+      final int yDirection = vent.last.y.compareTo(vent.first.y);
 
-      for (int y = yStart; y <= yEnd; y++) {
-        ventGrid[y][x]++;
-      }
-    } else if (vent.first.y == vent.last.y) {
-      final int y = vent.first.y;
-      final int xStart = min(vent.first.x, vent.last.x);
-      final int xEnd = max(vent.first.x, vent.last.x);
-
-      for (int x = xStart; x <= xEnd; x++) {
-        ventGrid[y][x]++;
+      for (int offset = 0; offset <= length; offset++) {
+        ventGrid[vent.first.y + yDirection * offset]
+            [vent.first.x + xDirection * offset]++;
       }
     }
   }
@@ -57,31 +53,16 @@ void _part1(Iterable<Iterable<Coordinate>> vents, List<List<int>> ventGrid) {
 
 void _part2(Iterable<Iterable<Coordinate>> vents, List<List<int>> ventGrid) {
   for (Iterable<Coordinate> vent in vents) {
-    if (vent.first.x == vent.last.x) {
-      final int x = vent.first.x;
-      final int yStart = min(vent.first.y, vent.last.y);
-      final int yEnd = max(vent.first.y, vent.last.y);
+    final int length = max(
+      (vent.first.x - vent.last.x).abs(),
+      (vent.first.y - vent.last.y).abs(),
+    );
+    final int xDirection = vent.last.x.compareTo(vent.first.x);
+    final int yDirection = vent.last.y.compareTo(vent.first.y);
 
-      for (int y = yStart; y <= yEnd; y++) {
-        ventGrid[y][x]++;
-      }
-    } else if (vent.first.y == vent.last.y) {
-      final int y = vent.first.y;
-      final int xStart = min(vent.first.x, vent.last.x);
-      final int xEnd = max(vent.first.x, vent.last.x);
-
-      for (int x = xStart; x <= xEnd; x++) {
-        ventGrid[y][x]++;
-      }
-    } else {
-      final int length = (vent.first.x - vent.last.x).abs();
-      final int xDirection = vent.first.x < vent.last.x ? 1 : -1;
-      final int yDirection = vent.first.y < vent.last.y ? 1 : -1;
-
-      for (int offset = 0; offset <= length; offset++) {
-        ventGrid[vent.first.y + yDirection * offset]
-            [vent.first.x + xDirection * offset]++;
-      }
+    for (int offset = 0; offset <= length; offset++) {
+      ventGrid[vent.first.y + yDirection * offset]
+          [vent.first.x + xDirection * offset]++;
     }
   }
 
