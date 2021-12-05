@@ -36,12 +36,12 @@ void _part1(Iterable<int> draws, Set<Set<Map<int, bool>>> boards) {
 
   final int unmarkedSum = winningBoard!.fold(
     0,
-    (int previous, Map<int, bool> current) =>
-        previous +
+    (int total, Map<int, bool> current) =>
+        total +
         current.entries.fold(
           0,
-          (int previous, MapEntry<int, bool> current) =>
-              previous + (current.value ? 0 : current.key),
+          (int total, MapEntry<int, bool> current) =>
+              total + (current.value ? 0 : current.key),
         ),
   );
   final int score = unmarkedSum * winningDraw!;
@@ -81,12 +81,12 @@ void _part2(Iterable<int> draws, Set<Set<Map<int, bool>>> boards) {
 
   final int unmarkedSum = lastWinningBoard!.fold(
     0,
-    (int previous, Map<int, bool> current) =>
-        previous +
+    (int total, Map<int, bool> current) =>
+        total +
         current.entries.fold(
           0,
-          (int previous, MapEntry<int, bool> current) =>
-              previous + (current.value ? 0 : current.key),
+          (int total, MapEntry<int, bool> current) =>
+              total + (current.value ? 0 : current.key),
         ),
   );
   final int score = unmarkedSum * lastWinningDraw!;

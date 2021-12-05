@@ -31,7 +31,7 @@ void _part2(List<int> depths) {
   for (int i = 0; i < depths.length - windowSize + 1; i++) {
     final List<int> window = depths.sublist(i, i + windowSize);
     final int depth =
-        window.fold(0, (int previous, int current) => previous + current);
+        window.fold(0, (int total, int current) => total + current);
 
     if (previousDepth != null && depth > previousDepth) {
       increases++;
